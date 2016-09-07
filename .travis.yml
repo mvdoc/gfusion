@@ -1,0 +1,30 @@
+# vim ft=yaml
+# travis-ci.org definition for gfusion build
+language: python
+sudo: false
+python:
+  - "2.7"
+#  - "3.2"
+  #- "3.3"
+  #- "3.4"
+  #- "3.5"
+#  - "pypy"
+#  - "pypy3"
+cache:
+  - pip
+before_install:
+  # - if [[ $TRAVIS_PYTHON_VERSION == 2.7 ]]; then travis_retry sudo apt-get update -qq; fi
+
+git:
+  #depth: 99999
+
+install:
+  - travis_retry pip install -q coveralls codecov
+  - pip install -e '.[tests]'
+
+script:
+  - nosetests --with-doctest --with-cov --cover-package ddr --logging-level=INFO -v
+
+after_success:
+  - coveralls
+  - codecov
