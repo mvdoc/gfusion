@@ -1,7 +1,16 @@
 """Module for optimization routines"""
 import numpy as np
 
+from .due import due, Doi, BibTeX
 
+
+@due.dcite(BibTeX("""@article{chen2011projection,
+           title={Projection onto a simplex},
+           author={Chen, Yunmei and Ye, Xiaojing},
+           journal={arXiv preprint arXiv:1101.6081},
+           year={2011}
+           }"""),
+           description="Efficient algorithm for projection onto a simplex")
 def simplex_projection(y):
     """Projection of a n-dimensional vector onto the simplex Dn
     Dn = { x : x n-dim, 0 <= x <= 1, sum(x) = 1}
