@@ -19,7 +19,13 @@ def simplex_projection(y):
     x : np.ndarray (n_features, )
         projection onto the simplex Dn
     """
+    if not isinstance(y, (np.ndarray, list)):
+        y = np.array([y])
+
     n_features = len(y)
+    if n_features == 0:
+        raise ValueError('y cannot be empty')
+
     sorted_y = np.sort(y)[::-1]
     tmpsum = 0.
     bget = False
