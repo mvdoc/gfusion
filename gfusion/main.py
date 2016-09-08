@@ -62,7 +62,7 @@ def _compute_symmetric_nonnegative_factorization(M):
 
     Returns
     -------
-    S : (n, n) non negative symmetric 
+    S : (n, n) non negative symmetric
 
     """
     pass
