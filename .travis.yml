@@ -12,15 +12,10 @@ python:
 #  - "pypy3"
 cache:
   - pip
-before_install:
-  # - if [[ $TRAVIS_PYTHON_VERSION == 2.7 ]]; then travis_retry sudo apt-get update -qq; fi
-
-git:
-  #depth: 99999
 
 install:
   - travis_retry pip install -q coveralls codecov
-  - pip install -e '.[tests]'
+  # - pip install -e '.[tests]'
 
 script:
   - nosetests --with-doctest --with-cov --cover-package ddr --logging-level=INFO -v
