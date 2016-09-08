@@ -18,7 +18,7 @@ install:
   # - pip install -e '.[tests]'
 
 script:
-  - nosetests --with-doctest --with-cov --cover-package gfusion --logging-level=INFO -v
+  - nosetests --with-doctest --with-coverage --cover-package gfusion --logging-level=INFO -v
 
 after_success:
   - coveralls
