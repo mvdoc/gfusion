@@ -1,4 +1,7 @@
 # gfusion
+[![Build
+Status](https://travis-ci.org/mvdoc/gfusion.svg?
+branch=master)](https://travis-ci.org/mvdoc/gfusion)
 [![Coverage
 Status](https://coveralls.io/repos/github/mvdoc/gfusion/badge.svg?
 branch=master)](https://coveralls.io/github/mvdoc/gfusion?branch=master)
