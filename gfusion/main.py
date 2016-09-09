@@ -170,7 +170,7 @@ def _solve_weight_vector(similarities, grouping_matrix, delta):
     # do some type check
     if np.any(similarities < 0):
         raise ValueError('similarities contain invalid values (< 0)')
-    if delta < 0:
+    if delta <= 0:
         raise ValueError('delta value of {0} not allowed, '
                          'needs to be >=0'.format(delta))
 
@@ -182,7 +182,7 @@ def _solve_weight_vector(similarities, grouping_matrix, delta):
         a[i] = np.linalg.norm(squareform(similarities[i]) - sigma)**2
 
     # solve for weight
-    weight = simplex_projection(1./2*delta * a)
+    weight = simplex_projection(a/(2*delta))
     return np.atleast_2d(weight)
 
 
