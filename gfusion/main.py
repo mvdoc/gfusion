@@ -204,7 +204,7 @@ def _solve_omega(D, U, delta1):
     -------
     omega : np.ndarray (n_similarities, 1)
     """
-    return __solve_weight_vector(D, U, delta1)
+    return _solve_weight_vector(D, U, delta1)
 
 
 def _solve_pi(S, V, delta2):
@@ -225,7 +225,7 @@ def _solve_pi(S, V, delta2):
     -------
     pi : np.ndarray (m_similarities, 1)
     """
-    return __solve_weight_vector(S, V, delta2)
+    return _solve_weight_vector(S, V, delta2)
 
 
 def _solve_u(Theta, U, V, L, lambda1, D, omega):
