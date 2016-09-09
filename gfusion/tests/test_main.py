@@ -30,14 +30,24 @@ def test_solve_weight_vector():
                   grouping_matrix, delta)
 
     # if I have two similarities, and one is null + the grouping matrix is all
-    # to all, and delta is 0 (no regularization), then I expect that the weight
-    # vector is [1, 0]
+    # to all, and delta is not 0, then I expect that
+    # the weight vector is [1, 0]
     similarities = np.vstack((1000*np.ones((1, 6)),
                               np.zeros((1, 6))
                               ))
     grouping_matrix = np.ones((4, 4))
     delta = 1
     assert_array_almost_equal(np.atleast_2d([1., 0.]),
+                              _solve_weight_vector(similarities,
+                                                   grouping_matrix,
+                                                   delta))
+    # and if I have identical similarities, then it should be .5
+    similarities = np.vstack((np.ones((1, 6)),
+                              np.ones((1, 6))
+                              ))
+    grouping_matrix = np.ones((4, 4))
+    delta = 1
+    assert_array_almost_equal(np.atleast_2d([.5, .5]),
                               _solve_weight_vector(similarities,
                                                    grouping_matrix,
                                                    delta))
