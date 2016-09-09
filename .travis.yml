@@ -1,7 +1,7 @@
 # vim ft=yaml
 # travis-ci.org definition for gfusion build
 language: python
-sudo: true
+sudo: required
 python:
   - "2.7"
 #  - "3.2"
