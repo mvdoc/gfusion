@@ -1,8 +1,9 @@
 """Tests for main.py"""
-from ..main import _solve_weight_vector
+from ..main import _solve_weight_vector, _solve_theta
 import numpy as np
-from numpy.testing import assert_array_almost_equal
+from numpy.testing import assert_array_almost_equal, assert_array_equal
 from nose.tools import assert_raises, assert_equal, assert_true
+from scipy import linalg
 
 
 def test_solve_weight_vector():
@@ -51,3 +52,25 @@ def test_solve_weight_vector():
                               _solve_weight_vector(similarities,
                                                    grouping_matrix,
                                                    delta))
+
+
+def test_solve_theta():
+    U = V = L = np.zeros((2, 2))
+    R = np.ones((2, 2))
+
+    assert_array_equal(_solve_theta(U, V, L, R), R)
+
+    # test in another way
+    for i in range(10):
+        n = np.random.randint(1, 10)
+        m = np.random.randint(1, 10)
+        theta = np.random.randn(n, m)
+        R = np.ones((n, m))
+        R[0, 0] = 0
+        U, L, V = linalg.svd(theta)
+        L = linalg.diagsvd(L, *R.shape)
+        V = V.T
+
+        theta_ = _solve_theta(U, V, L, R)
+        assert_array_almost_equal(theta_[0, 0], theta[0, 0])
+        assert_array_equal(theta_.ravel()[1:], R.ravel()[1:])

@@ -122,7 +122,7 @@ def _solve_lambda(U, V):
     pass
 
 
-def _solve_theta(U, V, R, L):
+def _solve_theta(U, V, L, R):
     """Solve theta
 
     Parameters
@@ -135,11 +135,11 @@ def _solve_theta(U, V, R, L):
 
         latent matrix for source 2
 
+    L : np.ndarray (latent_dimension1, latent_dimension2)
+
     R : np.ndarray (n_features, m_features)
 
         known association matrix between source 1 and source 2
-
-    L : np.ndarray (latent_dimension1, latent_dimension2)
 
 
     Returns
@@ -147,7 +147,14 @@ def _solve_theta(U, V, R, L):
     Theta : np.ndarray (n_features, m_features)
         densified association matrix between source 1 and source 2
     """
-    pass
+    W = np.dot(np.dot(U, L), V.T)
+    assert(W.shape == R.shape)
+
+    theta = R.copy()
+    mask = np.where(theta == 0.)
+    theta[mask] = W[mask]
+
+    return theta
 
 
 def _solve_weight_vector(similarities, grouping_matrix, delta):
