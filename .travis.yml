@@ -13,9 +13,10 @@ python:
 cache:
   - pip
 
+before_install:
+  - travis_retry sudo apt-get install python-scipy
 install:
   - travis_retry pip install -q coveralls codecov
-  - pip install -r requirements.txt
   # - pip install -e '.[tests]'
 
 script:
