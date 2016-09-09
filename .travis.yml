@@ -30,7 +30,7 @@ before_install:
 install:
   # Useful for debugging any issues with conda
   - conda info -a
-  - conda install --yes python=$TRAVIS_PYTHON_VERSION pip numpy scipy nose
+  - conda install --yes python=$TRAVIS_PYTHON_VERSION pip numpy scipy nose scikit-learn
   - pip install coveralls codecov
 
 script:

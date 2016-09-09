@@ -8,6 +8,7 @@ drug similarity and disease similarity." AMIA Annu Symp Proc. 2014.
 """
 import numpy as np
 from scipy.spatial.distance import squareform
+from sklearn.utils.extmath import squared_norm
 
 from .optimize import simplex_projection
 
@@ -179,7 +180,7 @@ def _solve_weight_vector(similarities, grouping_matrix, delta):
     # preallocate vector
     a = np.zeros(n_similarities)
     for i in range(n_similarities):
-        a[i] = np.linalg.norm(squareform(similarities[i]) - sigma)**2
+        a[i] = squared_norm(squareform(similarities[i]) - sigma)
 
     # solve for weight
     weight = simplex_projection(a/(2*delta))
