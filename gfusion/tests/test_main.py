@@ -1,6 +1,7 @@
 """Tests for main.py"""
 from ..main import _solve_weight_vector
 import numpy as np
+from numpy.testing import assert_array_almost_equal
 from nose.tools import assert_raises, assert_equal, assert_true
 
 
@@ -27,3 +28,16 @@ def test_solve_weight_vector():
     assert_raises(ValueError,
                   _solve_weight_vector, similarities_invalid,
                   grouping_matrix, delta)
+
+    # if I have two similarities, and one is null + the grouping matrix is all
+    # to all, and delta is 0 (no regularization), then I expect that the weight
+    # vector is [1, 0]
+    similarities = np.vstack((1000*np.ones((1, 6)),
+                              np.zeros((1, 6))
+                              ))
+    grouping_matrix = np.ones((4, 4))
+    delta = 1
+    assert_array_almost_equal(np.atleast_2d([1., 0.]),
+                              _solve_weight_vector(similarities,
+                                                   grouping_matrix,
+                                                   delta))
